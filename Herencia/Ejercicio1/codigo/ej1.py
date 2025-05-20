@@ -1,90 +1,120 @@
+#1. Modelar diferentes tipos de vehículos. Las clases deben tener las siguientes características: 
+#Vehículo<marca, modelo, año, precio_base> Métodos: mostrar_info() muestra la información básica del vehículo Coche (hereda de Vehículo)< num_puertas, tipo_combustible> 
+#Métodos: mostrar_info() debe mostrar la información básica más los atributos adicionales Moto (hereda de Vehículo)< cilindrada, tipo_motor> 
+#Métodos: mostrar_info() debe mostrar la información básica más los atributos adicionales 
+#a) Implementa las clases con sus constructores, getters y setters.  
+#b) Crea instancias de Coche y Moto y muestra su información usando el método mostrar_info(). 
+#c) Muestra todos los coches que tienen más de 4 puertas. 
+#d) Mostrar los coches y motos actuales (gestión 2025) 
 class Vehiculo:
     def __init__(self,marca,modelo,año,precioBase):
-        self.__marca = marca
+        self.__marca = marca 
         self.__modelo = modelo
         self.__año = año
         self.__precioBase = precioBase
         
     def __str__(self):
-        mostrar = f"Marca: {self.__marca} | Modelo: {self.__modelo} | Año: {self.__año} | Precio: {self.__ precioBase} Bs"
-        return mostrar
+        return f"Marca: {self.__marca}| Modelo: {self.__modelo}| Año :{self.__año} | Precio Base : {self.__precioBase} Bs "
     
-    def getmarca(self):
-        return self.marca
+    def getMarca(self):
+        return self.__marca
     
-    def setmarca(self,marca):
-        self.marca = marca
+    def setMarca(self,marca):
+        self.__marca = marca
         
-    def getmodelo(self):
-        return self.modelo
+    def getModelo(self):
+        return self.__modelo
     
-    def setmodelo(self,modelo):
-        self.modelo = modelo
-
-    def getaño(self):
-        return self.año
-    
-    def setaño(self,año):
-        self.año = año
+    def setModelo(self,modelo):
+        self.__modelo = modelo
         
-    def getprecioBase(self):
-        return self.precioBase
+    def getAño(self):
+        return self.__año
     
-    def setprecioBase(self,precioBase):
-        self.precioBase = precioBase
+    def setAño(self,año):
+        self.__año = año
+        
+    def getPrecioBase(self):
+        return self.__precioBase
     
+    def setPrecioBase(self,precioBase):
+        self.__precioBase = precioBase
+        
 class Coche(Vehiculo):
     def __init__(self,marca,modelo,año,precioBase,nroPuertas,tipoCombustible):
         super().__init__(marca,modelo,año,precioBase)
-        self.nroPuertas = nroPuertas
-        self.tipoCombustible = tipoCombustible
+        self.__nroPuertas = nroPuertas
+        self.__tipoCombustible = tipoCombustible
         
     def __str__(self):
-        mostrar = super(). __str__()
-        return (f"{mostrar}\nNumero de puertas: {self.nroPuertas} | Tipo de Combustible: {self.tipoCombustible}")
+        cad = super().__str__()
+        cad = cad + f"| Nº Puertas: {self.__nroPuertas}| Tipo de Combustible : {self.__tipoCombustible}"
+        return (cad)
     
-    def getnroPuertas(self):
-        return self.nroPuertas
+    def getNroPuertas(self):
+        return self.__nroPuertas
     
+    def setNroPuertas(self,nroPuertas):
+        self.__nroPuertas = nroPuertas
+        
+    def getTipoCombustible(self):
+        return self.__tipoCombustible
+    
+    def setTipoCombustible(self,tipoCombustible):
+        self.__tipoCombustible = tipoCombustible
+        
+        
 class Moto(Vehiculo):
     def __init__(self,marca,modelo,año,precioBase,cilindrada,tipoMotor):
         super().__init__(marca,modelo,año,precioBase)
-        self.cilindrada = cilindrada
+        self.__cilindrada = cilindrada
         self.tipoMotor = tipoMotor
         
     def __str__(self):
-        mostrar = super(). __str__()
-        return (f"{mostrar}\nCilindrada: {self.cilindrada} | Tipo de Motor: {self.tipoMotor}")
+        cad =super().__str__()
+        cad = cad + f"| Cilindrada: {self.__cilindrada} | Tipo de Motor: {self.tipoMotor}"
+        return (cad)
+    
+    def getCilindrada (self):
+        return self.__cilindrada
+    
+    def setCilindrada(self,cilindrada):
+        self.__cilindrada = cilindrada
         
-
-v1 = Coche("Toyota","Hilux",2020,35000,4,"Gasolina")
-v2 = Coche("Honda","City",2015,15000,6,"Electrico")
-v3 = Coche("Toyota","Hilux",2025,35000,4,"Gas")
-v4 = Coche("Honda","City",2015,15000,2,"Gasolina")
-m1 = Moto("Honda","LP258",2021,3000 ,25,"gasolina")
-m2 = Moto("Honda","SP298",2018,3050 ,25,"gasolina")
-print(v1)
-print("------------------------------------------")
-print(v2)
-print("------------------------------------------")
-print(v3)
-print("------------------------------------------")
-print(v4)
-print("------------------------------------------")
-print(m1)
-print("------------------------------------------")
-print(m2)
-
-print("\n=== Coches con más de 4 puertas ===")
-coches = [v1, v2, v3]
-for coche in coches:
-    if coche.getnroPuertas() > 4:
-        print(coche)
-        print("------------")
+    def getTipoMotor(self):
+        return self.__tipoMotor
+    
+    def setTipoMotor(self,tipoMotor):
+        self.__tipoMotor = tipoMotor
         
-print("\n=== Vehículos de la gestión 2025 ===")
-vehiculos = coches + [m1, m2]
-for vehiculo in vehiculos:
-    if vehiculo.getaño() == 2025:
-        print(vehiculo)
-        print("------------")
+    
+class main():
+    a1 = Coche("Toyota","4x4",2020,35000,4,"Gasolina")
+    a2 = Coche("Toyota","Caldina",2021,29000,4,"gasolina")
+    a3 = Coche("BMW","GTX-205",2025,57000,2,"Gas")
+    a4 = Coche("Suzuki","J-569K",2024,3000,6,"Gasolina")
+    m1 = Moto("Yamaha","Tracer 7 / GT",2025, 15000,"689 cc","2 cil.en linea")
+    m2 = Moto("Harley","Davidson Fat Boy",2025,70000,"1.923 cc","2 cil, en V")
+    m3 = Moto("Rieju","Xplora 557",2024,15000,"554 cc","2.cil en linea")
+    print("---------Autos: --------")
+    print(a1)
+    print(a2)
+    print(a3)
+    print(a4)
+    print("---------Motos: ---------")
+    print(m1)
+    print(m2)
+    print(m3)
+    #Mostrar todos los coches con mas de 4 puertas
+    print("------Coches con mas de 4 puertas------")
+    coches = [a1,a2,a3,a4]
+    for coche in coches:
+        if coche.getNroPuertas() > 4:
+            print(coche) 
+    #mostrar coches y motos actuales 2025
+    print("----Motos y Coches del 2025----")
+    vehiculos = [a1,a2,a3,a4,m1,m2,m3]
+    for i in vehiculos:
+        if i.getAño() == 2025:
+            print(i)
+            
