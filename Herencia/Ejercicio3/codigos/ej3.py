@@ -120,6 +120,7 @@ class Docente(Persona):
 
 estudiantes = [
     Estudiante("1234567", "Juan", "Perez", "789456123", "2000-05-20", "M", "RU001", "2021-02-10", 6),
+    Estudiante("1234567", "Juan", "Felipez", "789456123", "2000-05-20", "M", "RU001", "2021-02-10", 6),
     Estudiante("4567891", "Ana", "Gomez", "789456124", "2003-04-12", "F", "RU002", "2022-03-15", 3),
     Estudiante("7891234", "Luis", "Felipez", "789456125", "1995-09-10", "M", "RU003", "2020-01-01", 8),
 ]
@@ -146,15 +147,22 @@ if ingenieros_m:
     mayor.mostrar()
 
 print("\n------ Personas con el mismo apellido --------")
-for est in estudiantes:
-    coincidencias = []
+
+apellidos_estudiantes = set(est.get_apellido() for est in estudiantes)
+apellidos_docentes = set(doc.get_apellido() for doc in docentes)
+
+apellidos_comunes = apellidos_estudiantes.intersection(apellidos_docentes)
+
+for apellido in apellidos_comunes:
+    print(f"\nApellido en común: {apellido}")
+    
+    print("Estudiantes:")
+    for est in estudiantes:
+        if est.get_apellido() == apellido:
+            est.mostrar()
+    
+    print("Docentes:")
     for doc in docentes:
-        if est.get_apellido() == doc.get_apellido():
-            coincidencias.append(doc)
-    if coincidencias:
-        print(f"\nApellido en común: {est.get_apellido()}")
-        print("Estudiante:")
-        est.mostrar()
-        print("Docentes con el mismo apellido:")
-        for doc in coincidencias:
+        if doc.get_apellido() == apellido:
             doc.mostrar()
+
