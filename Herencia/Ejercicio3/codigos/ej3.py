@@ -13,43 +13,33 @@ class Persona:
         self.__nombre = nombre
         self.__apellido = apellido
         self.__celular = celular
-        self.__fecha_Nac = fecha_Nac  
-        self.__sexo = sexo  
+        self.__fecha_Nac = fecha_Nac
+        self.__sexo = sexo
 
-    def get_ci(self):
+    def get_ci(self): 
         return self.__ci
-
-    def get_nombre(self):
+    def get_nombre(self): 
         return self.__nombre
-
-    def get_apellido(self):
+    def get_apellido(self): 
         return self.__apellido
-
-    def get_celular(self):
+    def get_celular(self): 
         return self.__celular
-
-    def get_fecha_Nac(self):
+    def get_fecha_Nac(self): 
         return self.__fecha_Nac
-
-    def get_sexo(self):
+    def get_sexo(self): 
         return self.__sexo
 
-    def set_ci(self, ci):
+    def set_ci(self, ci): 
         self.__ci = ci
-
-    def set_nombre(self, nombre):
+    def set_nombre(self, nombre): 
         self.__nombre = nombre
-
-    def set_apellido(self, apellido):
+    def set_apellido(self, apellido): 
         self.__apellido = apellido
-
-    def set_celular(self, celular):
+    def set_celular(self, celular): 
         self.__celular = celular
-
-    def set_fecha_Nac(self, fecha_Nac):
+    def set_fecha_Nac(self, fecha_Nac): 
         self.__fecha_Nac = fecha_Nac
-
-    def set_sexo(self, sexo):
+    def set_sexo(self, sexo): 
         self.__sexo = sexo
 
     def mostrar(self):
@@ -67,27 +57,49 @@ class Estudiante(Persona):
         self.__fecha_Ingreso = fecha_Ingreso
         self.__semestre = semestre
 
-    def get_ru(self):
+    def get_ru(self): 
         return self.__ru
-
-    def get_fecha_Ingreso(self):
+    def get_fecha_Ingreso(self): 
         return self.__fecha_Ingreso
-
-    def get_semestre(self):
+    def get_semestre(self): 
         return self.__semestre
 
-    def set_ru(self, ru):
+    def set_ru(self, ru): 
         self.__ru = ru
-
-    def set_fecha_Ingreso(self, fecha_Ingreso):
+    def set_fecha_Ingreso(self, fecha_Ingreso): 
         self.__fecha_Ingreso = fecha_Ingreso
-
-    def set_semestre(self, semestre):
+    def set_semestre(self, semestre): 
         self.__semestre = semestre
 
     def mostrar(self):
         super().mostrar()
         print(f"RU: {self.__ru}, Fecha Ingreso: {self.__fecha_Ingreso}, Semestre: {self.__semestre}")
+
+    @staticmethod
+    def estudiantes_mayores_de(lista_estudiantes, edad_limite):
+        print(f"\n-- Estudiantes mayores de {edad_limite} años --")
+        for est in lista_estudiantes:
+            if est.calcular_edad() > edad_limite:
+                est.mostrar()
+                print("-" * 40)
+
+    @staticmethod
+    def persona_con_el_mismo_apellido(lista_estudiantes, lista_docentes):
+        print("\n------ Personas con el mismo apellido --------")
+        apellidos_estudiantes = set(est.get_apellido() for est in lista_estudiantes)
+        apellidos_docentes = set(doc.get_apellido() for doc in lista_docentes)
+
+        comunes = apellidos_estudiantes & apellidos_docentes
+        for apellido in comunes:
+            print(f"\nApellido en común: {apellido}")
+            print("Estudiantes:")
+            for est in lista_estudiantes:
+                if est.get_apellido() == apellido:
+                    est.mostrar()
+            print("Docentes:")
+            for doc in lista_docentes:
+                if doc.get_apellido() == apellido:
+                    doc.mostrar()
 
 class Docente(Persona):
     def __init__(self, ci="0000000", nombre="Nombre", apellido="Apellido", celular="0000000000", fecha_Nac="1980-01-01", sexo="N", nit="000", profesion="Docente", especialidad="General"):
@@ -98,29 +110,28 @@ class Docente(Persona):
 
     def get_nit(self):
         return self.__nit
-
-    def get_profesion(self):
+    def get_profesion(self): 
         return self.__profesion
-
-    def get_especialidad(self):
+    def get_especialidad(self): 
         return self.__especialidad
 
-    def set_nit(self, nit):
+    def set_nit(self, nit): 
         self.__nit = nit
-
-    def set_profesion(self, profesion):
+    def set_profesion(self, profesion): 
         self.__profesion = profesion
-
-    def set_especialidad(self, especialidad):
+    def set_especialidad(self, especialidad): 
         self.__especialidad = especialidad
 
     def mostrar(self):
         super().mostrar()
         print(f"NIT: {self.__nit}, Profesión: {self.__profesion}, Especialidad: {self.__especialidad}")
 
+    @staticmethod
+    def persona_con_el_mismo_apellido(lista_estudiantes, lista_docentes):
+        Estudiante.persona_con_el_mismo_apellido(lista_estudiantes, lista_docentes)
+
 estudiantes = [
     Estudiante("1234567", "Juan", "Perez", "789456123", "2000-05-20", "M", "RU001", "2021-02-10", 6),
-    Estudiante("1234567", "Juan", "Felipez", "789456123", "2000-05-20", "M", "RU001", "2021-02-10", 6),
     Estudiante("4567891", "Ana", "Gomez", "789456124", "2003-04-12", "F", "RU002", "2022-03-15", 3),
     Estudiante("7891234", "Luis", "Felipez", "789456125", "1995-09-10", "M", "RU003", "2020-01-01", 8),
 ]
@@ -128,41 +139,18 @@ estudiantes = [
 docentes = [
     Docente("9789644", "Carlos", "Lopez", "789456999", "1975-03-01", "M", "NIT001", "Ingeniero", "Sistemas"),
     Docente("1257895", "Lucia", "Perez", "789456998", "1980-11-11", "F", "NIT002", "Arquitecta", "Diseño"),
-    Docente("9972598", "Marco", "Felipez", "789456997", "1985-06-06", "M", "NIT003", "Ingeniero", "Civil"),
-    Docente("1598753","Jhony","Felipez","68521476","05-09-1980","F","NIT004","Programacion", "Informatica")
+    Docente("9972598", "Marco", "Felipez", "789456997", "1985-06-06", "M", "NIT003", "Ingeniero", "Civil")
 ]
 
-# c) estudiantes mayores de 25 años
-print("\n------ Estudiantes mayores de 25 años ------")
-for est in estudiantes:
-    if est.calcular_edad() > 25:
-        est.mostrar()
-        print("-" * 40)
+Estudiante.estudiantes_mayores_de(estudiantes, 25)
 
-# d)docente con profesión "Ingeniero", sexo masculino, y que sea el mayor
-print("\n-------- Docente Ingeniero, Masculino y más viejo -----")
-ingenieros_m = [d for d in docentes if d.get_profesion() == "Ingeniero" and d.get_sexo() == "M"]
-if ingenieros_m:
-    mayor = max(ingenieros_m, key=lambda d: d.calcular_edad())
+# Mostrar docente más viejo, masculino e ingeniero
+print("\n---- Docente masculino, Ingeniero y más viejo ----")
+ingenieros_masculinos = [d for d in docentes if d.get_profesion() == "Ingeniero" and d.get_sexo() == "M"]
+if ingenieros_masculinos:
+    mayor = max(ingenieros_masculinos, key=lambda d: d.calcular_edad())
     mayor.mostrar()
 
-print("\n------ Personas con el mismo apellido --------")
-
-apellidos_estudiantes = set(est.get_apellido() for est in estudiantes)
-apellidos_docentes = set(doc.get_apellido() for doc in docentes)
-
-apellidos_comunes = apellidos_estudiantes.intersection(apellidos_docentes)
-
-for apellido in apellidos_comunes:
-    print(f"\nApellido en común: {apellido}")
-    
-    print("Estudiantes:")
-    for est in estudiantes:
-        if est.get_apellido() == apellido:
-            est.mostrar()
-    
-    print("Docentes:")
-    for doc in docentes:
-        if doc.get_apellido() == apellido:
-            doc.mostrar()
+# Mostrar personas con el mismo apellido
+Docente.persona_con_el_mismo_apellido(estudiantes, docentes)
 
